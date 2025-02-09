@@ -466,7 +466,7 @@ fuel_type_dictionary = {
 st.set_page_config(page_title='Used Car price Prediction')
 
 # Creating cars brands and models df by the cleaned dataset we saved
-df = pd.read_csv('../Code/Used_Car_Final.csv')
+df = pd.read_csv('../Dataset/Used_Car_Final.csv')
 
 # Creating a function for filtering the model name correspond to it brand
 # Return the models of the selected Brand only
@@ -581,8 +581,9 @@ if predict:
         pred = model_pred.predict(inp_array)
         if pred < 0: # handeling negative outputs
             st.error('The input values must be irrelevant, try again by giving relevent information.')
-        pred = round(float(pred),3)
-        write = 'The predicted price of the car is ₹'+ str(pred) # showing the price prediction
+        pred = round(float(np.exp(pred)))
+        formatted_pred = f"{pred:,}"
+        write = 'The predicted price of the car is ₹'+ str(formatted_pred) # showing the price prediction
 
         col3, col4 = st.columns(2)
         with col3:
@@ -604,9 +605,9 @@ if predict:
 
 # writing some information about the projects.
 st.header('Info About the Project')
-prj_info = """
+project_info = """
             Here you can predict the price of your used car giving some information (Don't worry, we don't save data, or do we? 😈)
             Click on predict button, and see what happens\n
 """
-st.write(prj_info)
+st.write(project_info)
 st.header("""Until then 🫡""")
