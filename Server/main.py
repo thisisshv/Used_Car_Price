@@ -320,14 +320,8 @@ fuel_type_dictionary = {
 # Title
 st.set_page_config(page_title='Used Car price Prediction')
 
-# Creating cars brands and models df by the cleaned dataset we saved
+# Creating df by the cleaned dataset we saved
 df = pd.read_csv('../Dataset/Used_Car_Final.csv')
-
-# Creating a function for filtering the model name correspond to it brand
-# Return the models of the selected Brand only
-def find_model(brand):
-    model = car[car['Brand'] == brand]['Model']
-    return list(model)
 
 # Loading Model
 @st.cache_resource
