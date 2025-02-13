@@ -324,17 +324,17 @@ brand_model_dict = {'Honda': ['Amaze', 'Mobilio', 'Elevate', 'Accord', 'Jazz', '
 st.set_page_config(page_title='Used Car price Prediction')
 
 
+# Loading the model
 @st.cache_resource
 def load_model():
     print("Current working directory:", os.getcwd())  # Debugging line
     model_path = os.path.join(os.path.dirname(__file__), '../Dataset/Used_Car_Price_Prediction.pkl')
+    print("Model path:", model_path)  # Debugging line
     if not os.path.exists(model_path):
         st.error(f"Model file not found at {model_path}")
         st.stop()  # Stop the execution if the model file is not found
     with open(model_path, 'rb') as f:
         return pickle.load(f)
-    print("Current working directory:", os.getcwd())
-    print("Model path:", model_path)
 
 # Show a spinner while the model is loading
 with st.spinner('Hold on, the model is loading!'):
