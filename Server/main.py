@@ -322,8 +322,6 @@ brand_model_dict = {'Honda': ['Amaze', 'Mobilio', 'Elevate', 'Accord', 'Jazz', '
 # Title
 st.set_page_config(page_title='Used Car price Prediction')
 
-# Creating df by the cleaned dataset we saved
-df = pd.read_csv('../Dataset/Used_Car_Final.csv')
 
 # Loading Model
 @st.cache_resource
