@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-import pickle
+from joblib import load
 from datetime import datetime
 import base64
 import os
@@ -328,14 +328,10 @@ st.set_page_config(page_title='Used Car price Prediction')
 @st.cache_resource
 def load_model():
     model_path = os.path.join(os.path.dirname(__file__), '../Dataset/Used_Car_Price_Prediction.pkl')
-    print("Current working directory:", os.getcwd())  # Debugging line
-    print("Model path:", model_path)  # Debugging line
-    print("Does the model file exist?", os.path.exists(model_path))  # Check if the file exists
     if not os.path.exists(model_path):
         st.error(f"Model file not found at {model_path}")
-        st.stop()  # Stop the execution if the model file is not found
-    with open(model_path, 'rb') as f:
-        return pickle.load(f)
+        st.stop()
+    return load(model_path)
 
 # Show a spinner while the model is loading
 with st.spinner('Hold on, the model is loading!'):
