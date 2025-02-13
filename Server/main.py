@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-import joblib
+import pickle
 from datetime import datetime
 import base64
 
@@ -322,16 +322,22 @@ brand_model_dict = {'Honda': ['Amaze', 'Mobilio', 'Elevate', 'Accord', 'Jazz', '
 # Title
 st.set_page_config(page_title='Used Car price Prediction')
 
+# # Loading Model
+# @st.cache_resource
+# def model_loader(path):
+#     model = joblib.load(path)
+#     return model
 
-# Loading Model
-@st.cache_resource
-def model_loader(path):
-    model = joblib.load(path)
-    return model
+# Load the model
+@st.cache_resource  # Use this if you're using a version that supports it
+def load_model():
+    with open('../Dataset/Used_Car_Price_Prediction.pkl', 'rb') as f:
+        return pickle.load(f)
 
 # Show a spinner while the model is loading
-with st.spinner('Hold on, the app is loading!'):
-    model_pred = model_loader("../Dataset/Used_Car_Price_Prediction.pkl")
+with st.spinner('Hold on, the model is loading!'):
+    model_pred = load_model()  # Load the model using the correct function
+
 
 # Header
 st.markdown("<h1 style='text-align: center;'>Used Car Price Prediction</h1>", unsafe_allow_html=True)
