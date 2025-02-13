@@ -322,11 +322,6 @@ brand_model_dict = {'Honda': ['Amaze', 'Mobilio', 'Elevate', 'Accord', 'Jazz', '
 # Title
 st.set_page_config(page_title='Used Car price Prediction')
 
-# # Loading Model
-# @st.cache_resource
-# def model_loader(path):
-#     model = joblib.load(path)
-#     return model
 
 # Load the model
 @st.cache_resource  # Use this if you're using a version that supports it
