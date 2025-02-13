@@ -327,11 +327,14 @@ st.set_page_config(page_title='Used Car price Prediction')
 @st.cache_resource
 def load_model():
     print("Current working directory:", os.getcwd())  # Debugging line
-    model_path = '../Dataset/Used_Car_Price_Prediction.pkl'
+    model_path = os.path.join(os.path.dirname(__file__), '../Dataset/Used_Car_Price_Prediction.pkl')
     if not os.path.exists(model_path):
-        raise FileNotFoundError(f"Model file not found at {model_path}")
+        st.error(f"Model file not found at {model_path}")
+        st.stop()  # Stop the execution if the model file is not found
     with open(model_path, 'rb') as f:
         return pickle.load(f)
+    print("Current working directory:", os.getcwd())
+    print("Model path:", model_path)
 
 # Show a spinner while the model is loading
 with st.spinner('Hold on, the model is loading!'):
@@ -426,23 +429,32 @@ selected_transmission_value = transmission_dict[selected_transmission]
 selected_owner_value = owner_dict[selected_owner]
 selected_fuel_type_value = fuel_type_dictionary[selected_fuel_type]
 
-# Creating an input array for prediction using numerical values
-inp_array = np.array([[selected_brand_value, selected_model_value, selected_age, selected_KmDriven, selected_transmission_value, selected_owner_value, selected_fuel_type_value]])
+# Creating an input DataFrame for prediction
+inp_array = pd.DataFrame({
+    'Brand': [selected_brand_value],
+    'Model': [selected_model_value],
+    'Age': [selected_age],
+    'KmDriven': [selected_KmDriven],
+    'Transmission': [selected_transmission_value],
+    'Owner': [selected_owner_value],
+    'FuelType': [selected_fuel_type_value]
+})
 
 predict = st.button('Predict') # creating a predict button
 
 if predict: 
-        pred = model_pred.predict(inp_array)
-        if pred < 0: # handeling negative outputs
-            st.error('The input values must be irrelevant, try again by giving relevent information.')
-        pred = round(float(np.exp(pred)))
-        formatted_pred = f"{pred:,}"
-        write = 'The predicted price of the car is ₹'+ str(formatted_pred) # showing the price prediction
+    pred = model_pred.predict(inp_array)
+    if pred < 0:
+        st.error('The input values must be irrelevant, try again by giving relevant information.')
+    else:
+        pred_value = np.exp(pred[0])  # Extract the first element
+        pred_value = round(float(pred_value))
+        formatted_pred = f"{pred_value:,}"
+        write = 'The predicted price of the car is ₹' + str(formatted_pred)
 
         col3, col4 = st.columns(2)
         with col3:
             st.success(write)
-
 
         # Showing gif
         with col4:
