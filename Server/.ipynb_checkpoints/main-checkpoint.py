@@ -6,7 +6,7 @@ from datetime import datetime
 import base64
 
 # Input dict for categorical label
-# Brand Dictionary
+# Brand dict
 brand_dict = {
     'Ambassador': 0,
     'Ashok': 1,
@@ -46,7 +46,7 @@ brand_dict = {
     'Volkswagen': 35,
     'Volvo': 36
 }
-# Model Dictionary
+# Model Dict
 model_dict = {
     '1 Series': 0,
     '1000': 1,
@@ -296,7 +296,7 @@ model_dict = {
     'i10': 245,
     'i20': 246
 }
-# Transmission Dictionary
+# Transmission Dict
 transmission_dict = {
     'Automatic': 0,
     'Manual': 1
@@ -316,8 +316,6 @@ fuel_type_dictionary = {
     'LPG': 3,
     'Petrol': 4
 }
-# Brand model Dictionary
-brand_model_dict = {'Honda': ['Amaze', 'Mobilio', 'Elevate', 'Accord', 'Jazz', 'WRV', 'CRV', 'Civic', 'City', 'Brio', 'BRV'], 'Toyota': ['Etios Liva', 'Land Cruiser', 'Etios Cross', 'Fortuner', 'Glanza', 'Etios', 'Yaris', 'Estima', 'Vellfire', 'Qualis', 'Corolla', 'Camry', 'Innova', 'Urban Cruiser Hyryder'], 'Volkswagen': ['Beetle', 'Jetta', 'Tiguan', 'Virtus', 'Polo', 'Taigun', 'Ameo', 'Vento', 'Passat'], 'Maruti Suzuki': ['S-Presso', 'Omni', '800', 'Zen-Estilo', 'Fronx ', '1000', 'Invicto', 'Alto', 'Ignis', 'Ritz', 'Eeco', 'XL6', 'Swift', 'Celerio', 'Swift Dzire', 'Gypsy', 'A-Star', 'Fronx', 'Vitara-Brezza', 'Jimny', 'Zen', 'Baleno', 'Ciaz', 'Esteem', 'WagonR', 'Ertiga', 'SX4', 'Grand Vitara', 'S-Cross'], 'BMW': ['7 Series', 'X6', '5 Series', 'X4', '3 Series', 'Z4', 'X5', 'X3', '6 Series', 'X1', '1 Series', 'X7', '2 Series'], 'Ford': ['Freestyle', 'Ikon', 'Endeavour', 'Classic', 'Fusion', 'Aspire', 'Mustang', 'Fiesta', 'Ecosport', 'Figo'], 'Kia': ['Seltos', 'Carnival', 'Carens', 'Cerato', 'Sonet'], 'Mercedes-Benz': ['R-Class', 'GLA', 'CLA', 'GLS', 'G-Class', 'AMG C43', 'B-Class', 'SL-Class', 'S-Class', 'GLC', 'C-Class', 'E-Class', 'AMG A35', 'SLK-Class', 'CLS', 'GL-Class', 'V-Class', 'AMG', 'GLE', 'M-Class', 'A-Class'], 'Hyundai': ['i10', 'Santro', 'Tucson', 'Accent', 'Creta', 'Alcazar', 'Verna', 'Getz', 'Santa Fe', 'i20', 'Sonata', 'Eon', 'Venue', 'Exter', 'Elantra', 'Aura', 'Xcent'], 'Audi': ['Q7', 'A3', 'TT', 'Q5', 'A8', 'Q3', 'A4', 'RS5', 'A7', 'A5', 'A6'], 'Renault': ['Triber', 'Captur', 'Duster', 'Kwid', 'Fluence', 'Logan', 'Lodgy', 'Koleos', 'Kiger', 'Pulse', 'Scala'], 'MG': ['Gloster', 'Astor', 'Hector'], 'Volvo': ['XC60', 'S80', 'XC90', 'S90', 'XC40', 'V40', 'S60'], 'Skoda': ['Laura', 'Yeti', 'Rapid', 'Octavia', 'Slavia', 'Fabia', 'Superb', 'Kodiaq', 'Kushaq'], 'Tata': ['Tigor', 'Punch', 'Nexon', 'Manza', 'Harrier', 'Hexa', 'Zest', 'Nano', 'Curvv', 'Altroz', 'Sumo', 'Safari', 'Bolt', 'Venture', 'Tiago', 'Xenon', 'Indigo', 'Punch ', 'Indica'], 'Mahindra': ['XUV700', 'Quanto', 'Thar', 'Nuvosport', 'XUV300', 'Marshal', 'Marazzo', 'KUV100', 'E-20', 'Jeep', 'XUV500', 'Alturas G4', 'Scorpio', 'Xylo', 'Bolero', 'TUV300', 'Verito'], 'Mini': ['Cooper', 'Cooper S', 'Cooper 5', 'Cooper Countryman', 'Cooper Convertible', 'Cooper 3', 'Cooper Clubman'], 'Land Rover': ['Freelander 2', 'Range Rover Velar', 'Discovery', 'Defender', 'Range Rover Evoque', 'Range Rover'], 'Jeep': ['Compass', 'Wrangler', 'Meridian'], 'Chevrolet': ['Trailblazer', 'Cruze', 'Spark', 'Aveo', 'Enjoy', 'Captiva', 'Beat', 'Sail U-VA', 'Optra', 'Sail', 'Tavera'], 'Jaguar': ['XE', 'Others', 'F', 'F-Pace', 'XJ', 'XF'], 'Fiat': ['Linea', 'Avventura', 'Petra', 'Urban Cross', 'Siena', 'Punto'], 'Aston Martin': ['Vanquish'], 'Porsche': ['Cayenne', 'Cayman', 'Panamera', 'Macan', '718 Boxster'], 'Nissan': ['Micra', 'Sunny', 'Magnite', 'Urvan', 'Patrol', 'Kicks', 'Evalia', 'X-Trail', 'Terrano', 'Teana'], 'Force Motors': ['Force One', 'Gurkha', 'Trax Cruiser'], 'Mitsubishi': ['Pajero Sport', 'Cedia', 'Montero', 'Lancer', 'Outlander', 'Pajero'], 'Lexus': ['LS', 'ES', 'RX', 'NX', 'LX'], 'Isuzu': ['MUX', 'D-Max', 'Hi-Lander'], 'Datsun': ['GO Plus', 'GO', 'Redi GO'], 'Ambassador': ['Classic', 'Ambassador'], 'Rolls-Royce': ['Phantom'], 'Bajaj': ['RE60'], 'Ssangyong': ['Rexton'], 'Opel': ['Corsa'], 'Ashok': ['Leyland Stile'], 'Bentley': ['Continental', 'Flying Spur'], 'Maserati': ['Gran Turismo'], 'Lamborghini': ['Gallardo'], 'Land': ['Range Rover'], 'Smart': ['Fortwo']}
 
 # Title
 st.set_page_config(page_title='Used Car price Prediction')
@@ -342,16 +340,16 @@ st.markdown("<h1 style='text-align: center;'>Used Car Price Prediction</h1>", un
 # Inputs from user -> Brand | Model | Age | KmDriven | Transmission | Owner | FuelType
 
 # Brand
-# Get unique brands from the brand_dict keys
-brands = list(brand_dict.keys())
+# Get unique brands
+brands = df['Brand'].unique()
 
 # Dropdown for brand selection
 selected_brand = st.selectbox("Select a Brand", brands)
 
 
 # Model
-# Filter models based on selected brand using brand_model_dict
-filtered_models = brand_model_dict.get(selected_brand, [])
+# Filter models based on selected brand
+filtered_models = df[df['Brand'] == selected_brand]['Model'].unique()
 
 # Dropdown for model selection
 selected_model = st.selectbox("Select a Model", filtered_models)
@@ -396,23 +394,23 @@ selected_KmDriven = st.number_input(
 
 
 # Transmission
-transmission = list(transmission_dict.keys())
+transmission = df['Transmission'].unique()
 
-# Dropdown for transmission selection
+# Dropdown for brand selection
 selected_transmission = st.selectbox("Select a transmission", transmission)
 
 
 # Owner
-owner = list(owner_dict.keys())
+owner = df['Owner'].unique()
 
-# Dropdown for owner type selection
-selected_owner = st.selectbox("Select an owner type", owner)
+# Dropdown for brand selection
+selected_owner = st.selectbox("Select a owner type", owner)
 
 
 # FuelType
-fuel_type = list(fuel_type_dictionary.keys())
+fuel_type = df['FuelType'].unique()
 
-# Dropdown for fuel type selection
+# Dropdown for brand selection
 selected_fuel_type = st.selectbox("Select a fuel type", fuel_type)
 
 
