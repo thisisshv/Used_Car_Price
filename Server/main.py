@@ -4,6 +4,7 @@ import numpy as np
 import pickle
 from datetime import datetime
 import base64
+import os
 
 # Input dict for categorical label
 # Brand Dictionary
@@ -323,10 +324,13 @@ brand_model_dict = {'Honda': ['Amaze', 'Mobilio', 'Elevate', 'Accord', 'Jazz', '
 st.set_page_config(page_title='Used Car price Prediction')
 
 
-# Load the model
-@st.cache_resource  # Use this if you're using a version that supports it
+@st.cache_resource
 def load_model():
-    with open('../Dataset/Used_Car_Price_Prediction.pkl', 'rb') as f:
+    print("Current working directory:", os.getcwd())  # Debugging line
+    model_path = '../Dataset/Used_Car_Price_Prediction.pkl'
+    if not os.path.exists(model_path):
+        raise FileNotFoundError(f"Model file not found at {model_path}")
+    with open(model_path, 'rb') as f:
         return pickle.load(f)
 
 # Show a spinner while the model is loading
